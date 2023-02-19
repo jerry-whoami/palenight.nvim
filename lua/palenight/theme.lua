@@ -12,19 +12,34 @@ M.colors = {
 	foreground_darker = "#7982b4",
 	line_numbers = "#4e5579",
 	comments = "#676e95",
-	accent = "#7a43bd",
+	-- accent = "#7a43bd",
+	accent = "#C792EA",
 
-	red = "#ff5370",
-	orange = "#f78c6c",
-	yellow = "#ffcb6b",
-	green = "#c3e88d",
-	cyan = "#89ddff",
-	blue = "#82aaff",
-	paleblue = "#b2ccd6",
-	purple = "#D49BFD",
-	brown = "#c17e70",
-	pink = "#f07178",
+	white = "#ffffff",
+	black = "#000000",
+	red = "#f07178",
+	orange = "#F78C6C",
+	yellow = "#FFCB6B",
+	green = "#C3E88D",
+	cyan = "#89DDFF",
+	blue = "#82AAFF",
+	paleblue = "#B2CCD6",
+	purple = "#C792EA",
+	brown = "#916b53",
+	pink = "#ff9cac",
 	violet = "#bb80b3",
+
+	-- red = "#ff5370",
+	-- orange = "#f78c6c",
+	-- yellow = "#ffcb6b",
+	-- green = "#c3e88d",
+	-- cyan = "#89ddff",
+	-- blue = "#82aaff",
+	-- paleblue = "#b2ccd6",
+	-- purple = "#D49BFD",
+	-- brown = "#c17e70",
+	-- pink = "#f07178",
+	-- violet = "#bb80b3",
 
 	-- x 6 background / 10 color
 	red_dark = "#9e4057",
@@ -83,10 +98,10 @@ M.highlights = function(colors, transparent)
 
 		-- Syntax
 		Normal = { fg = colors.foreground, bg = transparent and "NONE" or colors.background },
-		Identifier = { fg = colors.foreground },
+		Identifier = { fg = colors.red },
 		Comment = { fg = colors.comments, italic = true },
 		NonText = { fg = colors.background },
-		Keyword = { fg = colors.purple },
+		Keyword = { fg = colors.cyan },
 		Repeat = { fg = colors.purple },
 		Conditional = { fg = colors.purple },
 		Statement = { fg = colors.purple },
@@ -107,7 +122,56 @@ M.highlights = function(colors, transparent)
 		SpellRare = { undercurl = true, sp = colors.violet },
 		SpellLocal = { undercurl = true, sp = colors.cyan },
 		Noise = { fg = colors.cyan },
+		Punctuation = { fg = colors.cyan },
 		SpecialKey = { fg = colors.line_numbers },
+
+		Character = { fg = colors.green },
+		Boolean = { fg = colors.pink },
+		Number = { fg = colors.orange },
+		-- Float         = { },
+
+		-- Conditional   = { }, --  if, then, else, endif, switch, etc.
+		-- Repeat        = { }, --   for, do, while, etc.
+		-- Label         = { }, --    case, default, etc.
+		-- Exception     = { }, --  try, catch, throw
+
+		-- Include       = { }, --  preprocessor #include
+		-- Define        = { }, --   preprocessor #define
+		-- Macro         = { }, --    same as Define
+		-- PreCondit     = { }, --  preprocessor #if, #else, #endif, etc.
+
+		StorageClass = { fg = colors.purple }, -- static, register, volatile, etc.
+		Typedef = { fg = colors.yellow }, --  A typedef
+		-- Structure     = { }, --  struct, union, enum, etc.
+
+		-- SpecialChar   = { }, --  special character in a constant
+		-- Tag           = { }, --    you can use CTRL-] on this
+		-- Delimiter     = { }, --  character that needs attention
+		-- SpecialComment= { }, -- special things inside a comment
+		-- Debug         = { }, --    debugging statements
+
+		-- Treesitter
+		["@constructor"] = { link = "Type" },
+		["@tag"] = { link = "Tag" },
+		["@tag.delimiter"] = { fg = colors.foreground_darker },
+		["@tag.attribute"] = { link = "Normal" },
+		["@variable.builtin"] = { link = "Identifier" },
+		["@variable"] = { link = "Normal" },
+		["@function.builtin"] = { link = "Function" },
+		["@constant.builtin"] = { link = "Constant" },
+		["@text.literal"] = { fg = colors.foreground_darker },
+		["@text.title"] = { link = "Title" },
+		["@text.uri"] = { fg = colors.blue, underline = true },
+		["@text.reference"] = { fg = colors.green },
+		["@text.strong"] = { bold = true },
+		["@text.emphasis"] = { italic = true },
+		["@type.qualifier"] = { link = "Keyword" },
+		["@punctuation.delimiter"] = { link = "Punctuation" },
+		["@punctuation.bracket"] = { link = "Punctuation" },
+		["@punctuation.special"] = { link = "Punctuation" },
+		["@keyword"] = { link = "Function" },
+		["@keyword.function"] = { link = "Function" },
+		["@parameter"] = { italic = true }, -- For parameters of a function.
 
 		-- Git
 		DiffAdd = { bg = colors.diff_add_background },
@@ -138,36 +202,6 @@ M.highlights = function(colors, transparent)
 		LspReferenceWrite = { bg = colors.references },
 		LspDiagnosticsVirtualTextError = { fg = "#9e4057" },
 		LspDiagnosticsVirtualTextWarning = { fg = "#9a6054" },
-
-		-- Treesitter
-		["@constructor"] = { link = "Type" },
-		["@tag"] = { link = "Tag" },
-		["@tag.delimiter"] = { fg = colors.foreground_darker },
-		["@tag.attribute"] = { link = "Normal" },
-		["@variable.builtin"] = { link = "Constant" },
-		["@variable"] = { link = "Normal" },
-		["@function.builtin"] = { link = "Function" },
-		["@constant.builtin"] = { link = "Constant" },
-		["@text.literal"] = { fg = colors.foreground_darker },
-		["@text.title"] = { link = "Title" },
-		["@text.uri"] = { fg = colors.blue, underline = true },
-		["@text.reference"] = { fg = colors.green },
-		["@text.strong"] = { bold = true },
-		["@text.emphasis"] = { italic = true },
-		["@type.qualifier"] = { link = "Keyword" },
-
-		-- DEPRECATED: nvim-treesitter has removed these highlight groups
-		-- https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1279974776
-		TSConstructor = { fg = colors.yellow },
-		TSTag = { fg = colors.yellow },
-		TSTagDelimiter = { fg = colors.foreground_darker },
-		TSVariableBuiltin = { fg = colors.orange },
-		TSVariable = { fg = colors.foreground },
-		TSKeywordOperator = { fg = colors.purple },
-		TSConstBuiltin = { fg = colors.orange },
-		TSFuncBuiltin = { fg = colors.blue },
-		TSLiteral = { fg = colors.foreground_darker },
-		TSNote = { fg = colors.cyan },
 
 		-- Markdown
 		markdownCode = { fg = colors.foreground_darker },
@@ -200,41 +234,43 @@ M.highlights = function(colors, transparent)
 
 		CmpItemAbbr = { fg = colors.foreground },
 		CmpItemAbbrDeprecated = { fg = colors.foreground_darker, strikethrough = true },
-		CmpItemAbbrMatch = { fg = colors.blue },
-		CmpItemAbbrMatchFuzzy = { fg = colors.blue },
+
+		CmpItemAbbrMatch = { fg = colors.paleblue },
+		CmpItemAbbrMatchFuzzy = { fg = colors.paleblue },
 
 		CmpItemMenu = { fg = colors.comments },
+		CmpItemKindText = { fg = colors.comments },
 
 		CmpItemKindDefault = { fg = colors.foreground_darker },
 
-		CmpItemKindKeyword = { fg = colors.purple },
+		CmpItemKindKeyword = { fg = colors.cyan },
+
+		CmpItemKindVariable = { fg = colors.purple },
+		CmpItemKindConstant = { fg = colors.purple },
 		CmpItemKindReference = { fg = colors.purple },
 		CmpItemKindValue = { fg = colors.purple },
-		CmpItemKindVariable = { fg = colors.purple },
-
-		CmpItemKindConstant = { fg = colors.orange },
-		CmpItemKindEnum = { fg = colors.orange },
-		CmpItemKindEnumMember = { fg = colors.orange },
-		CmpItemKindOperator = { fg = colors.orange },
-		CmpItemKindField = { fg = colors.orange },
 
 		CmpItemKindFunction = { fg = colors.blue },
 		CmpItemKindMethod = { fg = colors.blue },
+		CmpItemKindConstructor = { fg = colors.blue },
 
-		CmpItemKindConstructor = { fg = colors.yellow },
-		CmpItemKindClass = { fg = colors.yellow },
-		CmpItemKindInterface = { fg = colors.yellow },
-		CmpItemKindStruct = { fg = colors.yellow },
-		CmpItemKindEvent = { fg = colors.yellow },
-		CmpItemKindUnit = { fg = colors.yellow },
+		CmpItemKindClass = { fg = colors.orange },
+		CmpItemKindInterface = { fg = colors.orange },
+		CmpItemKindStruct = { fg = colors.orange },
+		CmpItemKindEvent = { fg = colors.orange },
+		CmpItemKindEnum = { fg = colors.orange },
+		CmpItemKindUnit = { fg = colors.orange },
+
+		CmpItemKindModule = { fg = colors.yellow },
 		CmpItemKindFile = { fg = colors.yellow },
 		CmpItemKindFolder = { fg = colors.yellow },
 
-		CmpItemKindModule = { fg = colors.green },
 		CmpItemKindProperty = { fg = colors.green },
+		CmpItemKindField = { fg = colors.green },
 		CmpItemKindTypeParameter = { fg = colors.green },
+		CmpItemKindEnumMember = { fg = colors.green },
+		CmpItemKindOperator = { fg = colors.green },
 		CmpItemKindSnippet = { fg = colors.green },
-		CmpItemKindText = { fg = colors.green },
 
 		-- nvim-telescope/telescope.nvim
 		TelescopeNormal = { bg = colors.background_darker },
@@ -242,14 +278,10 @@ M.highlights = function(colors, transparent)
 		TelescopeMatching = { fg = colors.blue },
 		TelescopePromptNormal = { bg = colors.references },
 		TelescopePromptBorder = { fg = colors.references, bg = colors.references },
-		TelescopePromptTitle = { bg = colors.references },
-		TelescopePromptPrefix = { fg = colors.blue },
-		TelescopeSelectionCaret = { fg = colors.blue, bg = colors.highlight },
+		TelescopePromptTitle = { fg = colors.accent, bg = colors.references },
+		TelescopePromptPrefix = { fg = colors.accent },
+		TelescopeSelectionCaret = { fg = colors.accent, bg = colors.highlight },
 		TelescopeSelection = { bg = colors.references },
-
-		-- kyazdani42/nvim-tree.lua
-		NvimTreeRootFolder = { fg = colors.green },
-		NvimTreeGitDirty = { fg = colors.green },
 
 		-- rcarriga/nvim-notify
 		NotifyERRORBorder = { fg = colors.red_dark },
@@ -282,6 +314,22 @@ M.highlights = function(colors, transparent)
 		-- L3MON4D3/LuaSnip
 		LuasnipChoice = { fg = colors.orange },
 		LuasnipInsert = { fg = colors.cyan },
+
+		-- Alpha
+		AlphaLogo = { fg = colors.accent },
+
+		-- Neotree
+		NeoTreeDimText = { fg = colors.comments },
+		NeoTreeDirectoryIcon = { fg = colors.accent },
+		NeoTreeDirectoryName = { fg = colors.foreground },
+		NeoTreeFloatTitle = { fg = colors.accent },
+
+		-- Illuminate
+		illuminatedWord = { bg = colors.references },
+		illuminatedCurWord = { bg = colors.references },
+		IlluminatedWordText = { bg = colors.references },
+		IlluminatedWordRead = { bg = colors.references },
+		IlluminatedWordWrite = { bg = colors.references },
 	}
 end
 
