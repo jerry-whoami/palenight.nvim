@@ -12,8 +12,8 @@ M.colors = {
   foreground_darker = "#7982b4",
   line_numbers = "#4e5579",
   comments = "#676e95",
-  -- accent = "#7a43bd",
-  accent = "#C792EA",
+  accent = "#7a43bd",
+  -- accent = "#C792EA",
 
   white = "#ffffff",
   black = "#000000",
@@ -68,8 +68,8 @@ M.highlights = function(colors, transparent)
     Cursor = { fg = colors.background, bg = colors.blue },
     TermCursor = { fg = colors.background, bg = colors.blue },
     ColorColumn = { bg = colors.background_darker },
-    Search = { bg = colors.highlight },
-    IncSearch = { bg = colors.highlight },
+    Search = { bg = colors.selection },
+    IncSearch = { bg = colors.selection },
     Visual = { bg = colors.selection },
     MatchParen = { bg = colors.references },
     SignColumn = { bg = "NONE" },
@@ -320,9 +320,9 @@ M.highlights = function(colors, transparent)
 
     -- Neotree
     NeoTreeDimText = { fg = colors.comments },
-    NeoTreeDirectoryIcon = { fg = colors.accent },
+    -- NeoTreeDirectoryIcon = { fg = colors.foreground_darker },
     NeoTreeDirectoryName = { fg = colors.foreground },
-    NeoTreeFloatTitle = { fg = colors.accent },
+    NeoTreeFloatTitle = { fg = colors.foreground },
 
     -- Illuminate
     illuminatedWord = { bg = colors.references },
